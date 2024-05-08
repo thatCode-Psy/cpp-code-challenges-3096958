@@ -10,6 +10,10 @@
 #include <vector>
 #include <string>
 
+
+bool invalid_move(int x_pos, int y_pos) {
+    return x_pos < 0 || x_pos > 7 || y_pos < 0 || y_pos > 7;
+}
 // knight_moves()
 // Summary: This function receives a string with the location of a knight in a chessboard and returns a vector of strings with the possible locations it might move to.
 // Arguments:
@@ -18,10 +22,30 @@
 std::vector<std::string> knight_moves(std::string knight){
     std::vector<std::string> moves;
 
-    // Write your code here
+    int delim_pos = knight.find(",");
+    if(delim_pos != 1 || knight.length() != 3) {
+        return moves;
+    }
+    int x = std::stoi(knight.substr(0,1));
+    int y = std::stoi(knight.substr(2,1));
+    if (invalid_move(x,y)){
+        return moves;
+    }
+
+    int x_mods[8] = {-2,-2,-1,1,2,2,1,-1};
+    int y_mods[8] = {-1,1,2,2,1,-1,-2,-2};
+    for (int i = 0; i < 8; ++i) {
+        int x_pos = x + x_mods[i];
+        int y_pos = y + y_mods[i];
+        if (!invalid_move(x_pos,y_pos)){
+            moves.push_back(std::to_string(x_pos)+","+std::to_string(y_pos));
+        }
+    }
 
     return moves;
 }
+
+
 
 // Main function
 int main(){

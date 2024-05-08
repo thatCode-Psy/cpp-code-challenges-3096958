@@ -21,7 +21,7 @@ int main(){
     if(n > 366)
         matches = total;
     else{
-        // Write your code here
+        
     }
 
     std::cout << "The probability of a birthday match is " << (double)matches/total << "\n\n" << std::flush;  

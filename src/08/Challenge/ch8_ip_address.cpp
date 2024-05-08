@@ -18,8 +18,31 @@
 bool is_valid_ip(std::string ip){
 
     // Write your code here
-
-    return false;
+    int count = 0;
+    while(ip.compare("") != 0) {
+        if(count >= 4){
+            return false;
+        }
+        std::string check = ip;
+        int decimal_loc = ip.find(".");
+        if (decimal_loc == ip.length() - 1) { 
+            return false;
+        }
+        if (decimal_loc != -1) {
+            check = ip.substr(0, decimal_loc);
+            ip = ip.substr(decimal_loc + 1, (ip.length() - decimal_loc) - 1);
+        }
+        else {
+            ip = "";
+        }
+        int segment = std::stoi(check);
+        if (segment < 0 || segment > 255)
+        {
+            return false;
+        }
+        ++count; 
+    }
+    return count == 4;
 }
 
 // Main function

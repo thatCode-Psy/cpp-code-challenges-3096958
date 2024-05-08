@@ -6,7 +6,9 @@
 class complex_num{
     
     // Write your code here
-
+    private:
+        double real_mod;
+        double im_mod;
     public:
          complex_num(double = 0.0, double = 0.0);
          complex_num operator +(complex_num);

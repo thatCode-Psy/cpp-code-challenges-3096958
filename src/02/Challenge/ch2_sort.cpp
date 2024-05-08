@@ -16,9 +16,29 @@
 // Returns: A boolean value: True on success, false otherwise.
 bool sort_array(int *arr, int n){
 
-    // Write your code here
-
-    return false;
+    if(n <= 1) 
+    {
+        return true;
+    }
+    int node = arr[0];
+    int node_pos = 0;
+    for(int i = 1; i < n; ++i){
+        if (arr[i] < node) {
+            int temp = arr[i];
+            for (int j = i; j > node_pos; --j){
+                arr[j] = arr[j-1];
+            }
+            arr[node_pos] = temp;
+            node_pos++;
+        }
+    }
+    sort_array(arr, node_pos);
+    if (node_pos + 1 < n) {
+        int* second_arr = &arr[node_pos + 1];
+        sort_array(second_arr, n - (node_pos + 1));
+    }
+    
+    return true;
 }
 
 // Main function
